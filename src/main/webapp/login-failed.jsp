@@ -15,6 +15,6 @@
     </style>
 </head>
 <body>
-<p>Login failed!</p>
+<p>Sign in was failed!</p>
 </body>
 </html>
