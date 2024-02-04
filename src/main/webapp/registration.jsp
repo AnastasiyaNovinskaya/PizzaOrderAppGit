@@ -1,10 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in to your PizzaOrderApp account</title>
+    <title>Create account</title>
     <style>
         body {
             margin: 0;
@@ -16,27 +13,32 @@
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
         }
-        a {
-            text-decoration: none;
+        label {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
         }
         input {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
             font-family: 'Arial', sans-serif;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-<img src="pizza.jpg" alt="Pizza Image">
-
-<form action="login" method="post">
-    <h4>Sign in</h4>
+<form action="registration" method="post">
+    <h4>Create an account by adding your username and password!</h4>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     <br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
     <br>
-    <input type="submit" value="Sign in">
-    <p>No account? <a href="registration.jsp">Create one!</a></p>
+    <input type="submit" value="Register now">
 </form>
 </body>
 </html>

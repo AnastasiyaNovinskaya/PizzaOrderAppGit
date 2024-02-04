@@ -20,6 +20,21 @@ public class Repository {
             System.err.println("An error occurred: " + exception.getMessage());
         }
     }
+
+    public void sendRegistration(String username, String password) {
+        String sendRegistration = "INSERT INTO pizza.users (username, password) values (?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sendRegistration);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            preparedStatement.executeUpdate();
+
+        } catch (Exception exception) {
+            System.err.println("An error occurred: " + exception.getMessage());
+        }
+    }
+
     public boolean validateUser(String username, String password) {
 
         String getUsers = "SELECT * FROM pizza.Users WHERE username=? AND password=?";
@@ -62,29 +77,5 @@ public class Repository {
         }
         return pizzaArray;
     }
-
-    public ArrayList<IngredientType> getIngredients() {
-
-        String getIngredients = "SELECT * FROM pizza.ingredients";
-        ArrayList<IngredientType> ingredientArray = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(getIngredients);
-            while (resultSet.next()) {
-
-                IngredientType ingredientType = new IngredientType();
-                ingredientType.setId(resultSet.getInt("ID"));
-                ingredientType.setName(resultSet.getString("Ingredient"));
-                ingredientType.setPrice(resultSet.getDouble("Price"));
-                ingredientArray.add(ingredientType);
-
-                System.out.println(resultSet.getInt("ID") +
-                        ": " + resultSet.getString("Ingredient") +
-                        ", price: " + resultSet.getDouble("Price") + "$");
-            }
-        } catch (SQLException exception) {
-            System.err.println("An error occurred: " + exception.getMessage());
-        }
-        return ingredientArray;
-    }
 }
+
