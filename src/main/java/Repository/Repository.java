@@ -64,18 +64,58 @@ public class Repository {
                 PizzaType pizzaType = new PizzaType();
                 pizzaType.setId(resultSet.getInt("ID"));
                 pizzaType.setName(resultSet.getString("PizzaType"));
+                pizzaType.setDescription(resultSet.getString("PizzaDescription"));
                 pizzaType.setPrice(resultSet.getDouble("Price"));
+                pizzaType.setImageUrl(resultSet.getString("ImageUrl"));
                 pizzaArray.add(pizzaType);
 
 
-                System.out.println(resultSet.getInt("ID") + ": " +
-                        resultSet.getString("PizzaType") +
-                        ", price: " + resultSet.getDouble("Price") + "$");
+                //System.out.println(resultSet.getInt("ID") + ": " +
+                  //      resultSet.getString("PizzaType") +
+                    //    ", price: " + resultSet.getDouble("Price") + "$");
             }
         } catch (SQLException exception) {
             System.err.println("An error occurred: " + exception.getMessage());
         }
         return pizzaArray;
     }
-}
+
+
+    public void addOrder(String pizzaName, int quantity) {
+        String sendOrder = "INSERT INTO pizza.allOrders (pizzaName, quantity) VALUES (?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sendOrder);
+            preparedStatement.setString(1, pizzaName);
+            preparedStatement.setInt(2, quantity);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            System.err.println("An error occurred: " + exception.getMessage());
+        }
+    }
+
+        public PizzaType getPizzaById(int pizzaId){
+            String getPizzaById = "SELECT * FROM pizza.pizzatype WHERE ID=?";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(getPizzaById);
+                preparedStatement.setInt(1, pizzaId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        PizzaType pizzaType = new PizzaType();
+                        pizzaType.setId(resultSet.getInt("ID"));
+                        pizzaType.setName(resultSet.getString("PizzaType"));
+                        pizzaType.setDescription(resultSet.getString("PizzaDescription"));
+                        pizzaType.setPrice(resultSet.getDouble("Price"));
+                        pizzaType.setImageUrl(resultSet.getString("ImageUrl"));
+                        return pizzaType;
+                    }
+                }
+            } catch (SQLException exception) {
+                System.err.println("An error occurred: " + exception.getMessage());
+            }
+            return null;
+        }
+    }
+
 
