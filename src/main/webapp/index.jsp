@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-<img src="pizza.jpg" alt="Pizza Image">
+<img src="images/pizza.jpg" alt="Pizza Image">
 
 <form action="login" method="post">
     <h4>Sign in</h4>
