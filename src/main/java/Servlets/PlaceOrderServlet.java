@@ -24,7 +24,7 @@ public class PlaceOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         String[] selectedPizzas = request.getParameterValues("selectedPizzas");
         Repository repository = new Repository();
         if (selectedPizzas != null) {
