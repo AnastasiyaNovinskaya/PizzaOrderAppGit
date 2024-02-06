@@ -29,3 +29,6 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+
+// I suggest to make connection field private, to keep internal workings of a class encapsulated.
+// We could extract the Repository into a field of the LoginServlet class to have Repository as a class field rather than a local variable.
