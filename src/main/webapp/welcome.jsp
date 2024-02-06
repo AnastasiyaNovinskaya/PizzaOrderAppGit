@@ -33,7 +33,7 @@
 <body>
 <h2>Welcome to PizzaOrder System, <%= session.getAttribute("username") %>!</h2>
 
-<a href="placeOrder">Place an order</a>
+<a href="selectPizza">Place an order</a>
 <a href="index.jsp">Check orders status</a>
 <a href="index.jsp">Logout</a>
 </body>

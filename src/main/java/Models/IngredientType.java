@@ -4,6 +4,7 @@ public class IngredientType {
     private int id;
     private String name;
     private double price;
+    private String ImageUrl;
 
     public int getId() {
         return id;
@@ -28,4 +29,13 @@ public class IngredientType {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 }
+

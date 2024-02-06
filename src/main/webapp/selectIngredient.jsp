@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Models.PizzaType" %>
+<%@ page import="Models.IngredientType" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,33 +30,31 @@
     </style>
 </head>
 <body>
-<h2>Select Pizza</h2>
-<form action="placeOrder" method="post">
+<h2>Select additional products</h2>
+<form action="selectIngredient" method="post">
     <table style="width: 80%; margin: 0 auto; border-collapse: collapse; margin-bottom: 20px;">
         <tr>
-            <th style="width: 20%;">Pizza</th>
-            <th style="width: 30%;">Ingredients</th>
+            <th style="width: 35%;">Products</th>
             <th style="width: 10%;">Image</th>
             <th style="width: 10%;">Price</th>
-            <th style="width: 30%;">Quantity</th>
+            <th style="width: 45%;">Quantity</th>
         </tr>
         <%
-            ArrayList<PizzaType> pizzas = (ArrayList<PizzaType>) session.getAttribute("pizzas");
-            if (pizzas != null && !pizzas.isEmpty()) {
-                for (PizzaType pizza : pizzas) {
+            ArrayList<IngredientType> ingredients = (ArrayList<IngredientType>) session.getAttribute("ingredients");
+            if (ingredients != null && !ingredients.isEmpty()) {
+                for (IngredientType ingredient : ingredients) {
         %>
         <tr>
             <td>
                 <label>
-                    <input type="checkbox" name="selectedPizzas" value="<%= pizza.getId() %>">
-                    <b><%= pizza.getName() %></b>
+                    <input type="checkbox" name="selectedIngredients" value="<%= ingredient.getId() %>">
+                    <b><%= ingredient.getName() %></b>
                 </label>
-            <td><%= pizza.getDescription() %></td>
-            <td><img src="<%= pizza.getImageUrl() %>" alt="<%= pizza.getName() %>"></td>
-            <td><%= pizza.getPrice() + " €" %></td>
+            <td><img src="<%= ingredient.getImageUrl() %>" alt="<%= ingredient.getName() %>"></td>
+            <td><%= ingredient.getPrice() + " €" %></td>
             <td>Quantity:
                 <label>
-                    <input type="number" name="pizzaQuantity<%= pizza.getId() %>" value="1" min="1">
+                    <input type="number" name="ingredientQuantity<%= ingredient.getId() %>" value="1" min="1">
                 </label>
             </td>
         </tr>
@@ -64,14 +63,14 @@
         } else {
         %>
         <tr>
-            No pizzas available.
+            No ingredients available.
         </tr>
         <%
             }
         %>
     </table>
-    <p>If you want to add something else, please select "Continue"</p>
-    <input type="submit" value="Continue">   <input type="submit" value="Place your order">
-</form>
-</body>
-</html>
+    <p>ITo add something else to your order, please select "Continue"</p>
+    <input type="submit" value="Continue">
+    </form>
+    </body>
+    </html>

@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet(name = "PlaceOrderServlet", value = "/placeOrder")
-public class PlaceOrderServlet extends HttpServlet {
+@WebServlet(name = "SelectPizzaServlet", value = "/selectPizza")
+public class SelectPizzaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -25,7 +25,7 @@ public class PlaceOrderServlet extends HttpServlet {
         session.setAttribute("pizzas", pizzaTypeArrayList);
         request.setAttribute("pizzas", pizzaTypeArrayList);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/placeOrderPlease.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/selectPizza.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -37,15 +37,19 @@ public class PlaceOrderServlet extends HttpServlet {
         String[] selectedPizzas = request.getParameterValues("selectedPizzas");
 
         Repository repository = new Repository();
+        double totalPrice = 0;
         if (selectedPizzas != null) {
             for (String pizzaId : selectedPizzas) {
                 String pizzaQuantities = request.getParameter("pizzaQuantity" + pizzaId);
                 int quantity = Integer.parseInt(pizzaQuantities);
                 PizzaType pizza = repository.getPizzaById(Integer.parseInt(pizzaId));
 
-                repository.addOrder(pizza.getName(), quantity);
+                double price = pizza.getPrice();
+                totalPrice = price * quantity;
+
+                repository.addPizzaOrder(pizza.getName(), quantity, totalPrice);
             }
         }
-        response.sendRedirect(request.getContextPath() + "/welcome.jsp");
+        response.sendRedirect(request.getContextPath() + "/selectIngredient");
     }
 }
